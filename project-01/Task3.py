@@ -3,6 +3,7 @@ Read file into texts and calls.
 It's ok if you don't understand how to read files.
 """
 import csv
+import re
 
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
@@ -47,4 +48,5 @@ The percentage should have 2 decimal digits
 numbers = []
 for sending, receiving, _, duration in calls:
     if sending.startswith('(080)'):
+        if re.match('^\((?P<code>0[0-9]+)\)[0-9]{7}$', receiving):
         print(sending, ' ', receiving, ' ', duration)
